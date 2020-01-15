@@ -33,7 +33,7 @@ for j = 1:length(fileName)
     % If the files is extracted contours, rather than a detection file
     if forClustering && isfield(file,'ClusteringData')
         ClusteringData = [ClusteringData; file.ClusteringData];
-    elseif isfield(file,'Calls')
+    else
         
         % Backwards compatibility with struct format for detection files
         if isstruct(file.Calls); file.Calls = struct2table(file.Calls, 'AsArray', true); end
@@ -75,8 +75,6 @@ for j = 1:length(fileName)
             
             clustAssign = [clustAssign; file.Calls.Type(i)];
         end
-    else
-        fprintf(1, 'Skipping empty file: %s\n', fileName{j})
     end
 end
 close(h)
